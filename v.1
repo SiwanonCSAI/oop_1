@@ -1,0 +1,45 @@
+class Person:
+    def __init__(self, name, age):
+        self.name = name
+        self.age = age
+
+    def display_info(self):
+        print(f"Name: {self.name}, Age: {self.age}")
+
+class TaxPayer(Person):
+    def __init__(self, name, age, income):
+        super().__init__(name, age)
+        self.income = income
+
+    def calculate_tax(self):
+        # ตัวอย่างการคำนวณภาษีงานเงินได้
+        tax_rate = 0.1
+        tax = self.income * tax_rate
+        return tax
+
+class BusinessOwner(TaxPayer):
+    def __init__(self, name, age, income, business_income):
+        super().__init__(name, age, income)
+        self.business_income = business_income
+
+    def calculate_tax(self):
+        # ตัวอย่างการคำนวณภาษีสำหรับเจ้าของธุรกิจ
+        personal_tax = super().calculate_tax()
+        business_tax_rate = 0.2
+        business_tax = self.business_income * business_tax_rate
+        total_tax = personal_tax + business_tax
+        return total_tax
+
+# สร้างวัตถุ
+person1 = Person("John", 30)
+person2 = TaxPayer("Jane", 25, 50000)
+person3 = BusinessOwner("Bob", 40, 70000, 30000)
+
+# เรียกใช้งานเมธอด
+person1.display_info()
+
+tax1 = person2.calculate_tax()
+print(f"Tax for {person2.name}: {tax1}")
+
+tax2 = person3.calculate_tax()
+print(f"Total tax for {person3.name}: {tax2}")
